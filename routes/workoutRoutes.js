@@ -1,22 +1,24 @@
 const express = require("express");
 const router = express.Router();
+const bodyParser = require("body-parser");
+const { getAllWorkouts, getSingleWorkout, createWorkout, updateWorkout, deleteWorkout } = require("../controllers/workoutControllers");
+
+router.use(bodyParser.json());
+router.use(bodyParser.text());
 
 // get all workouts
-router.get("/api/workouts",(req, res)=>{
-    res.send(" all workouts");
-});
+router.get("/", getAllWorkouts);
 
 // get single workout
-router.get("/api/workouts",(req, res)=>{
-    res.send(" all workouts");
-});
+router.get("/:id", getSingleWorkout);
 
 // create new workout
-router.post("/api/workouts",(req, res)=>{
-    res.send(" all workouts");
-});
+router.post("/", createWorkout);
 
 // update a workout
-router.patch("/api/workouts",(req, res)=>{
-    res.send(" all workouts");
-});
+router.patch("/:id", updateWorkout);
+
+//delete a workout
+router.delete("/:id", deleteWorkout);
+
+module.exports = router;
