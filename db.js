@@ -2,8 +2,8 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 dotenv.config();
-
-mongoose.connect(process.env.MONGO_URI)
+// console.log(process.env.MONGO_URI_GLOBAL);
+mongoose.connect(process.env.MONGO_URI_GLOBAL)
     .then(() => {
         console.log(" Database connected....");
     })

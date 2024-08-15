@@ -1,6 +1,4 @@
-const { Timestamp } = require("bson");
 const mongoose = require("mongoose");
-const { type } = require("os");
 
 const Schema = mongoose.Schema;
 const workoutSchema = new Schema({
@@ -16,7 +14,11 @@ const workoutSchema = new Schema({
    reps: {
       type: String,
       required: true
-   }
+   },
+   user_id: {
+      type: String,
+      required: true
+    }
 }, {
    timestamps: true
 });
