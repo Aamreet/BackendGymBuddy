@@ -13,7 +13,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     }
-    
+
 });
 
 userSchema.statics.signup = async function (email, password) {
@@ -32,7 +32,6 @@ userSchema.statics.signup = async function (email, password) {
         throw Error('Email already in use')
     }
 
-    //hash pwd
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     const user = await this.create({ email, password: hashedPassword });
@@ -49,13 +48,12 @@ userSchema.statics.login = async function (email, password) {
     if (!user) {
         throw Error('Email/ password Invalid')
     }
-    
-    //pwd comparisson
-     const isMatch = await bcrypt.compare( password, user.password);
-     if(!isMatch){
-         throw Error("Invalid Password");
-     }
-     return user;
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        throw Error("Invalid Password");
+    }
+    return user;
 }
 
 
