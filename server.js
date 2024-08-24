@@ -8,7 +8,9 @@ const profileRoutes = require("./routes/profileRoutes");
 const cors = require("cors");
 const app = express();
 const db = require("./db");
+const logger= require("./middleware/logger");
 
+app.use(logger);
 app.use(cors());
 app.use(express.json());
 app.use(express.text());

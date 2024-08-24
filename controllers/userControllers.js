@@ -19,7 +19,7 @@ const signupUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
     try {
-        console.log(req.url, " inside local backend");
+        console.log(req.url, " inside loginUser");
         const { email, password } = req.body;
         const user = await User.login(email, password);
         const token = createToken(user._id);
@@ -30,7 +30,22 @@ const loginUser = async (req, res) => {
     }
 }
 
+const verifyLoggedinUser= async(req, res)=>{
+    try {
+        //verify jwt token
+        console.log(" verifyLoggedinUser ");
+        const token= req.headers.authorization.split(' ')[1];
+        const decoded= jwt.verify(token, process.env.SECRET_KEY);
+        console.log(decoded);
+        res.send("Valid");
+    } catch (error) {
+        console.log("invalid");
+        res.send("Invalid");
+    }
+}
+
 module.exports = {
     signupUser,
-    loginUser
+    loginUser,
+    verifyLoggedinUser
 }
